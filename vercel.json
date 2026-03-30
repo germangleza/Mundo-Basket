@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/29aniversario/:path*",
+      "destination": "https://clinica-ivan-deniz-por-mundo-basket-h37z98deh.vercel.app/:path*"
+    }
+  ]
+}
