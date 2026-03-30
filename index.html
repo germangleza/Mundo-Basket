@@ -164,6 +164,32 @@
   .section-tag { font-size:17px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--orange); margin-bottom:16px; }
   .section-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic; font-size:clamp(40px,6vw,80px); text-transform:uppercase; line-height:0.95; color:var(--white); }
 
+
+  /* ── 29 ANIVERSARIO ── */
+  .aniversario { background:var(--black); padding:100px 48px; position:relative; overflow:hidden; }
+  .aniversario::before {
+    content:'29';
+    position:absolute; right:-2%; top:50%; transform:translateY(-50%);
+    font-family:'Barlow Condensed',sans-serif; font-weight:900;
+    font-size:40vw; color:rgba(255,94,0,0.06); line-height:1; pointer-events:none;
+  }
+  .aniversario-inner { max-width:760px; position:relative; z-index:1; }
+  .aniversario .section-tag { color:var(--orange); }
+  .aniversario-title {
+    font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
+    font-size:clamp(36px,5vw,72px); text-transform:uppercase; line-height:1;
+    color:var(--white); margin:16px 0 28px;
+  }
+  .aniversario-body { font-size:calc(1.05rem + 2px); line-height:1.75; color:rgba(255,255,255,0.7); max-width:640px; }
+  .aniversario-dates {
+    display:inline-flex; align-items:center; gap:10px;
+    margin-top:36px; background:rgba(255,94,0,0.12);
+    border:1px solid rgba(255,94,0,0.4); padding:14px 24px;
+    font-family:'Barlow Condensed',sans-serif; font-weight:700;
+    font-size:1.1rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--orange);
+  }
+
   /* ── ABOUT ── */
   .about { background:var(--dark); display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
   .about-body { margin-top:28px; font-size:calc(1.05rem + 2px); line-height:1.75; color:rgba(255,255,255,0.65); }
@@ -519,6 +545,18 @@
     <span class="marquee-item">29 Años de Historia <span class="marquee-dot">✦</span></span>
   </div>
 </div>
+
+<!-- 29 ANIVERSARIO -->
+<section class="aniversario">
+  <div class="aniversario-inner reveal">
+    <div class="section-tag">29 Aniversario</div>
+    <h2 class="aniversario-title">Clínica Internacional<br>con Coach Iván Déniz</h2>
+    <p class="aniversario-body">El coach de Astros de Jalisco, líder de CIBACOPA, subcampeón LNBP y participante en Champions Américas llega a Chiapas el 17, 18 y 19 de abril.</p>
+    <div class="aniversario-dates">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      17 · 18 · 19 de Abril — Tuxtla Gutiérrez
+    </div>
+  </div>
 </section>
 
 <!-- ABOUT -->
