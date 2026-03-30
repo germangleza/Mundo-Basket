@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica Iván Déniz · 29 Aniversario Mundo Basket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #E85D24;
+    --orange-light: #F5803E;
+    --orange-dim: rgba(232,93,36,0.12);
+    --cream: #F5F0E8;
+    --cream-dark: #EDE7D8;
+    --ink: #151210;
+    --ink-mid: #3A2E28;
+    --ink-soft: #FFFFFF;
+    --gold: #C9922A;
+    --gold-light: #F0C060;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-line {
+    position: absolute;
+    top: 0; left: 50%;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--orange) 30%, var(--orange) 70%, transparent);
+    opacity: 0.25;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .aniversario-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .aniversario-badge .line {
+    width: 32px;
+    height: 1px;
+    background: var(--orange);
+  }
+
+  .aniversario-badge span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 9vw, 120px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    color: var(--cream);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  .hero-title .highlight {
+    color: var(--orange);
+    display: block;
+  }
+
+  .hero-title .name {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(38px, 5vw, 62px);
+    color: var(--gold-light);
+    letter-spacing: 0.02em;
+    display: block;
+    line-height: 1.2;
+    margin-top: 4px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 380px;
+    margin: 28px 0 44px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  .hero-subtitle strong {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .cta-group {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .btn-primary:hover {
+    background: var(--orange-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    padding-bottom: 2px;
+  }
+
+  .btn-ghost:hover {
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+
+  /* ─── HERO RIGHT PANEL ─── */
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 60px;
+  }
+
+  .court-graphic {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .court-graphic svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .stats-stack {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    max-width: 320px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .stat-card {
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.08);
+    border-left: 3px solid var(--orange);
+    padding: 20px 24px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .stat-card:hover {
+    background: rgba(232,93,36,0.08);
+    border-color: rgba(245,240,232,0.15);
+    border-left-color: var(--orange-light);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.03em;
+    color: var(--cream);
+    line-height: 1;
+  }
+
+  .stat-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  /* ─── TICKER BAND ─── */
+  .ticker {
+    background: var(--orange);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 20s linear infinite;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 21px;
+    letter-spacing: 0.15em;
+    color: var(--white);
+  }
+
+  .ticker-inner span {
+    margin: 0 32px;
+    opacity: 0.6;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── SECTION BASE ─── */
+  section {
+    position: relative;
+    border-top: 1px solid rgba(232,93,36,0.15);
+    background: rgba(232,93,36,0.05);
+  }
+
+  .hero { border-top: none; background: var(--ink); }
+
+  .section-label {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--orange);
+  }
+
+  /* ─── ABOUT / COACH ─── */
+  .about {
+    padding: 120px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-left {}
+
+  .about-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 28px;
+  }
+
+  .about-headline em {
+    color: var(--orange);
+    font-style: normal;
+  }
+
+  .about-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 460px;
+  }
+
+  .about-body p + p { margin-top: 16px; }
+
+  .about-body strong {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .credential {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(245,240,232,0.07);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .credential:last-child { border-bottom: none; }
+
+  .cred-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--orange-dim);
+    border: 1px solid rgba(232,93,36,0.25);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .cred-text {}
+
+  .cred-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .cred-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ─── PILLARS ─── */
+  .pillars {
+    padding: 100px 80px;
+  }
+
+  .pillars-header {
+    margin-bottom: 64px;
+  }
+
+  .pillars-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.95;
+    color: var(--cream);
+    max-width: 600px;
+  }
+
+  .pillars-title span { color: var(--orange); }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .pillar {
+    padding: 48px 40px;
+    background: rgba(245,240,232,0.03);
+    border: 1px solid rgba(245,240,232,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .pillar:hover::before { transform: scaleX(1); }
+  .pillar:hover { background: rgba(232,93,36,0.06); }
+
+  .pillar-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 1;
+    color: rgba(232,93,36,0.12);
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+
+  .pillar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .pillar-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  /* ─── ANNIVERSARY BAND ─── */
+  .anniversary {
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .big-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(120px, 16vw, 200px);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--orange);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    opacity: 0.6;
+  }
+
+  .anniversary-text {}
+
+  .anniversary-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 7vw, 88px);
+    line-height: 0.92;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+
+  .anniversary-headline span { color: var(--orange); }
+
+  .anniversary-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 480px;
+  }
+
+  .anniversary-body strong {
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+
+  /* ─── WHAT YOU GET ─── */
+  .program {
+    padding: 100px 80px;
+    border-top: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .program-header {
+    margin-bottom: 64px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .program-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.95;
+    color: var(--cream);
+  }
+
+  .program-title span { color: var(--orange); }
+
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .program-item {
+    padding: 36px 40px;
+    background: rgba(245,240,232,0.02);
+    border: 1px solid rgba(245,240,232,0.06);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: background 0.2s;
+  }
+
+  .program-item:hover {
+    background: rgba(245,240,232,0.04);
+  }
+
+  .prog-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .prog-content {}
+
+  .prog-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .prog-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  /* ─── FECHAS ─── */
+  .fechas {
+    padding: 80px 80px;
+    border-top: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .fechas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 40px;
+  }
+
+  .fecha-card {
+    padding: 40px 36px;
+    border: 1px solid rgba(245,240,232,0.07);
+    background: rgba(245,240,232,0.02);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .fecha-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .fecha-card:hover::after { transform: scaleX(1); }
+  .fecha-card:hover { background: rgba(232,93,36,0.05); }
+
+  .fecha-dia {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 1;
+    color: var(--orange);
+    opacity: 0.25;
+    margin-bottom: 12px;
+  }
+
+  .fecha-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .fecha-nombre {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .fecha-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .fechas { padding: 80px 32px; }
+    .fechas-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── VIDEO EMBED ─── */
+  .video-section {
+    padding: 0 80px 100px;
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border: 1px solid rgba(232,93,36,0.2);
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  @media (max-width: 900px) {
+    .video-section { padding: 0 32px 80px; }
+  }
+
+  /* ─── ALUMNOS MB ─── */
+  .alumnos {
+    padding: 100px 80px;
+  }
+
+  .alumnos-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .alumnos-left {}
+
+  .alumnos-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 7vw, 88px);
+    line-height: 0.92;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+
+  .alumnos-headline span { color: var(--orange); }
+
+  .alumnos-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 440px;
+  }
+
+  .alumnos-body strong { color: var(--cream); font-weight: 400; }
+
+  .alumnos-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .alumno-benefit {
+    padding: 24px 28px;
+    border: 1px solid rgba(232,93,36,0.2);
+    border-left: 3px solid var(--orange);
+    background: rgba(232,93,36,0.04);
+    transition: background 0.2s;
+  }
+
+  .alumno-benefit:hover { background: rgba(232,93,36,0.1); }
+
+  .alumno-benefit-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .alumno-benefit-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  .alumnos-cta {
+    margin-top: 36px;
+    padding: 20px 28px;
+    border: 1px solid var(--orange);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .alumnos-cta-text {
+    font-size: 14px;
+    color: var(--cream);
+    line-height: 1.5;
+  }
+
+  .alumnos-cta-text strong { color: var(--orange); font-weight: 500; }
+
+  /* ─── SOLICITUD ─── */
+  .solicitud {
+    padding: 100px 80px;
+    border-top: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .solicitud-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+
+  .solicitud-left {}
+
+  .solicitud-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+
+  .solicitud-headline em {
+    color: var(--orange);
+    font-style: normal;
+  }
+
+  .solicitud-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+
+  .solicitud-body strong {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .solicitud-nota {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    padding: 16px 20px;
+    border-left: 2px solid rgba(232,93,36,0.3);
+    opacity: 0.8;
+  }
+
+  .solicitud-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  .form-input {
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.1);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  .form-input::placeholder { color: var(--ink-soft); }
+
+  .form-input:focus {
+    border-color: var(--orange);
+    background: rgba(232,93,36,0.05);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-submit {
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    align-self: flex-start;
+  }
+
+  .form-submit:hover {
+    background: var(--orange-light);
+    transform: translateY(-2px);
+  }
+
+  .form-disclaimer {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+
+  .form-success {
+    display: none;
+    padding: 24px;
+    border: 1px solid rgba(232,93,36,0.3);
+    background: rgba(232,93,36,0.06);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--cream);
+  }
+
+  @media (max-width: 900px) {
+    .solicitud { padding: 80px 32px; }
+    .solicitud-inner { grid-template-columns: 1fr; gap: 48px; }
+    .form-submit { width: 100%; text-align: center; }
+  }
+
+  /* ─── CTA FINAL ─── */
+  .cta-section {
+    padding: 120px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,93,36,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 24px;
+  }
+
+  .cta-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 0.95;
+    color: var(--cream);
+    max-width: 700px;
+    margin: 0 auto 16px;
+  }
+
+  .cta-headline span { color: var(--orange); }
+
+  .cta-sub {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-bottom: 48px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .cta-sub strong {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .btn-large {
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 20px 56px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+
+  .btn-large:hover {
+    background: var(--orange-light);
+    transform: translateY(-3px);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 80px;
+    border-top: 1px solid rgba(245,240,232,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer-brand {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--cream);
+  }
+
+  .footer-brand span { color: var(--orange); }
+
+  .footer-right {
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { display: none; }
+    .hero-left { padding: 80px 32px 60px; }
+    .about { grid-template-columns: 1fr; padding: 80px 32px; gap: 48px; }
+    .pillars { padding: 80px 32px; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .anniversary { grid-template-columns: 1fr; padding: 80px 32px; gap: 24px; }
+    .big-number { font-size: 100px; }
+    .alumnos { padding: 80px 32px; }
+    .alumnos-inner { grid-template-columns: 1fr; gap: 48px; }
+    
+    .program-grid { grid-template-columns: 1fr; }
+    .program { padding: 80px 32px; }
+    .program-header { flex-direction: column; align-items: flex-start; }
+    .cta-section { padding: 80px 32px; }
+    footer { padding: 32px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg-line"></div>
+
+  <div class="hero-left">
+    <div class="aniversario-badge">
+      <div class="line"></div>
+      <span>29 Aniversario Mundo Basket · Chiapas</span>
+    </div>
+
+    <p class="hero-eyebrow">Clínica Internacional para Entrenadores de Basquetbol</p>
+
+    <h1 class="hero-title">
+      <span class="highlight">Aprende del</span>
+      MEJOR
+      <span class="name">Coach Iván Déniz</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      El coach de <strong>Astros de Jalisco</strong>, líder de CIBACOPA y participante en Champions Américas, trae su metodología de campeonato directamente a Chiapas. <strong style="color: var(--orange)">Evento gratuito · Cupo Limitado.</strong>
+      <br><br>
+      <strong>17, 18 y 19 de abril · Tuxtla Gutiérrez, Chiapas</strong>
+    </p>
+
+    <div class="cta-group">
+      <a href="#pilares" class="btn-primary">Conoce sobre la clínica</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="court-graphic">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="20" width="360" height="360" stroke="white" stroke-width="1.5"/>
+        <line x1="200" y1="20" x2="200" y2="380" stroke="white" stroke-width="1"/>
+        <circle cx="200" cy="200" r="60" stroke="white" stroke-width="1"/>
+        <circle cx="200" cy="200" r="4" fill="white"/>
+        <rect x="20" y="140" width="80" height="120" stroke="white" stroke-width="1"/>
+        <rect x="300" y="140" width="80" height="120" stroke="white" stroke-width="1"/>
+        <path d="M20 200 A60 60 0 0 1 100 200" stroke="white" stroke-width="1"/>
+        <path d="M380 200 A60 60 0 0 0 300 200" stroke="white" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <div class="stats-stack">
+      <div class="stat-card">
+        <div class="stat-label">Fechas del evento</div>
+        <div class="stat-value">Abr 17–19</div>
+        <div class="stat-desc">Tres días · Chiapas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Posición actual</div>
+        <div class="stat-value">Líder</div>
+        <div class="stat-desc">CIBACOPA — Temporada en curso</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Competencia internacional</div>
+        <div class="stat-value">Champions</div>
+        <div class="stat-desc">Americas Basketball — Astros de Jalisco</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Costo de inscripción</div>
+        <div class="stat-value">Gratis</div>
+        <div class="stat-desc">Solo por invitación — aforo limitado</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Protagonistas en cancha</div>
+        <div class="stat-value">Alumnos MB</div>
+        <div class="stat-desc">Los jugadores de Mundo Basket, en acción</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    CAMPEONES DE CIBACOPA <span>·</span> CHAMPIONS AMÉRICAS <span>·</span> IVAN DENIZ <span>·</span> 17, 18 Y 19 DE ABRIL <span>·</span> EVENTO GRATUITO <span>·</span> SOLO POR INVITACIÓN <span>·</span> ALUMNOS MUNDO BASKET EN CANCHA <span>·</span> 29 ANIVERSARIO <span>·</span> METODOLOGÍA DE ÉLITE <span>·</span> CAMPEONES DE CIBACOPA <span>·</span> CHAMPIONS AMÉRICAS <span>·</span> IVAN DENIZ <span>·</span> 17, 18 Y 19 DE ABRIL <span>·</span> EVENTO GRATUITO <span>·</span> SOLO POR INVITACIÓN <span>·</span> ALUMNOS MUNDO BASKET EN CANCHA <span>·</span> 29 ANIVERSARIO <span>·</span> METODOLOGÍA DE ÉLITE <span>·</span>
+  </div>
+</div>
+
+ <!-- ─── 29 AÑOS ─── -->
+<section class="anniversary">
+  <div class="anniversary-text reveal">
+    <p class="section-label">Mundo Basket Chiapas</p>
+    <h2 class="anniversary-headline">
+      Celebración del<br><span>29 aniversario</span>
+    </h2>
+    <p class="anniversary-body">
+      29 años de construir basquetbol en Chiapas merecen una celebración a la altura. <strong>El mejor coach activo del país</strong>, compartiendo su sistema con los entrenadores que van a moldear la siguiente generación de jugadores chiapanecos.
+    </p>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section class="about">
+  <div class="about-left reveal">
+    <p class="section-label">El Coach</p>
+    <img src="coach.png" alt="Coach Iván Déniz" style="width:100%;max-width:480px;display:block;margin:24px 0;border-radius:4px;">
+    <div class="about-body">
+      <p>Iván Déniz es el coach que hoy dirige al equipo líder del basquetbol profesional en México, que compite en el escenario internacional más exigente del continente.</p>
+      <p>Lo que aprenderás en esta clínica no viene de libros ni de teoría: viene de la pizarra que está ganando partidos <strong>esta misma temporada</strong>.</p>
+    </div>
+  </div>
+
+  <div class="about-right reveal">
+    <div class="credential">
+      <div class="cred-icon">🏆</div>
+      <div class="cred-text">
+        <div class="cred-title">Coach Astros de Jalisco</div>
+        <div class="cred-sub">Líder actual de CIBACOPA y subcampeón 2025 de la LNBP</div>
+      </div>
+    </div>
+    <div class="credential">
+      <div class="cred-icon">🌎</div>
+      <div class="cred-text">
+        <div class="cred-title">Champions Américas</div>
+        <div class="cred-sub">Participación internacional con Astros en la máxima competencia del continente</div>
+      </div>
+    </div>
+    <div class="credential">
+      <div class="cred-icon">⭐</div>
+      <div class="cred-text">
+        <div class="cred-title">Mejor coach del momento</div>
+        <div class="cred-sub">Reconocido por el círculo profesional del basquetbol mexicano como el número uno activo</div>
+      </div>
+    </div>
+    <div class="credential">
+      <div class="cred-icon">🎟️</div>
+      <div class="cred-text">
+        <div class="cred-title">Gratuito</div>
+        <div class="cred-sub">Sin costo. El acceso es una distinción. </div>
+      </div>
+    </div>
+    <div class="credential">
+      <div class="cred-icon">📍</div>
+      <div class="cred-text">
+        <div class="cred-title">Por primera vez en Chiapas</div>
+        <div class="cred-sub">Este nivel de formación no estaba disponible en la región — hasta ahora</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ 
+<!-- ─── PROGRAMA ─── -->
+<section class="program" id="programa">
+  <div class="program-header reveal">
+    <div>
+      <p class="section-label">Contenido</p>
+      <h2 class="program-title">Qué <span>aprenderás</span></h2>
+    </div>
+  </div>
+
+  <div class="program-grid">
+    <div class="program-item reveal">
+      <div class="prog-num">01</div>
+      <div class="prog-content">
+        <div class="prog-title">Sistema ofensivo de élite</div>
+        <div class="prog-body">Los principios de ataque que Astros de Jalisco ejecuta hoy en la CIBACOPA y en Champions Américas. Espaciamiento, lectura de defensa y toma de decisiones colectiva.</div>
+      </div>
+    </div>
+    <div class="program-item reveal" style="transition-delay:0.1s">
+      <div class="prog-num">02</div>
+      <div class="prog-content">
+        <div class="prog-title">Identidad defensiva</div>
+        <div class="prog-body">Cómo construir un equipo que defiende con convicción. Los esquemas, transiciones y hábitos defensivos que definen al basquetbol de alto rendimiento en México.</div>
+      </div>
+    </div>
+    <div class="program-item reveal" style="transition-delay:0.05s">
+      <div class="prog-num">03</div>
+      <div class="prog-content">
+        <div class="prog-title">Gestión del equipo y liderazgo</div>
+        <div class="prog-body">El rol del coach dentro y fuera de la cancha. Cómo Iván Déniz construye cultura, maneja presión y toma decisiones en momentos clave de campeonato.</div>
+      </div>
+    </div>
+    <div class="program-item reveal" style="transition-delay:0.15s">
+      <div class="prog-num">04</div>
+      <div class="prog-content">
+        <div class="prog-title">Desarrollo de jugadores</div>
+        <div class="prog-body">Metodología de entrenamiento individual y colectivo. Conrrecto desarrollo técnico y mental del jugador mexicano en el contexto actual del juego alíneado a su etapa.</div>
+      </div>
+    </div>
+    <div class="program-item reveal" style="transition-delay:0.1s">
+      <div class="prog-num">05</div>
+      <div class="prog-content">
+        <div class="prog-title">Preparación y análisis de partido</div>
+        <div class="prog-body">El proceso de Iván Déniz para preparar un juego: scouting, pizarra, ajustes en tiempo real. El detrás del telón de un staff de competencia internacional.</div>
+      </div>
+    </div>
+    <div class="program-item reveal" style="transition-delay:0.2s">
+      <div class="prog-num">06</div>
+      <div class="prog-content">
+        <div class="prog-title">Sesión de preguntas directas</div>
+        <div class="prog-body">Acceso directo al coach. Trae tus situaciones reales, tus dudas sobre tu equipo, tu liga. Espacio abierto para resolver lo que ningún libro puede responderte.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FECHAS ─── -->
+<section class="fechas">
+  <div class="reveal">
+    <p class="section-label">Cuándo</p>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,72px);line-height:0.95;color:var(--cream);">Tres días. <span style="color:var(--orange);">Abril 2026.</span></h2>
+  </div>
+  <div class="fechas-grid">
+    <div class="fecha-card reveal">
+      <div class="fecha-dia">17</div>
+      <div class="fecha-label">Jueves · Día 1</div>
+      <div class="fecha-nombre">Apertura</div>
+      <div class="fecha-desc">Bienvenida e introducción al sistema. Iván Déniz presenta los fundamentos filosóficos y técnicos que rigen a Astros de Jalisco.</div>
+    </div>
+    <div class="fecha-card reveal" style="transition-delay:0.1s">
+      <div class="fecha-dia">18</div>
+      <div class="fecha-label">Viernes · Día 2</div>
+      <div class="fecha-nombre">Trabajo en cancha</div>
+      <div class="fecha-desc">Sesión práctica completa con alumnos de Mundo Basket. Ejercicios, sistemas y correcciones en tiempo real frente a los coaches asistentes.</div>
+    </div>
+    <div class="fecha-card reveal" style="transition-delay:0.2s">
+      <div class="fecha-dia">19</div>
+      <div class="fecha-label">Sábado · Día 3</div>
+      <div class="fecha-nombre">Cierre y preguntas</div>
+      <div class="fecha-desc">Sesión abierta de preguntas directas. Cada coach lleva sus casos reales. Iván Déniz responde sin filtros desde su experiencia de campeonato.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VIDEO ─── -->
+<section class="video-section">
+  <div class="video-wrapper reveal">
+    <iframe
+      src="https://www.youtube.com/embed/jwksvm8MSDY"
+      title="Clínica Iván Déniz · 29 Aniversario Mundo Basket"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+ <!-- ─── PILLARS ─── -->
+<section class="pillars" id="pilares">
+  <div class="pillars-header reveal">
+    <p class="section-label">Los tres pilares</p>
+    <h2 class="pillars-title">Lo que hace<br>esta clínica <span>única</span></h2>
+  </div>
+
+  <div class="pillars-grid">
+    <div class="pillar reveal">
+      <div class="pillar-number">01</div>
+      <h3 class="pillar-title">Vigencia real</h3>
+      <p class="pillar-body">Cada concepto que comparterá está validado en la cancha profesional en tiempo real.</p>
+    </div>
+    <div class="pillar reveal" style="transition-delay: 0.1s">
+      <div class="pillar-number">02</div>
+      <h3 class="pillar-title">Acceso exclusivo</h3>
+      <p class="pillar-body">La metodología de un equipo que compite en Champions Américas trasladado a categorías formativas, disponible aquí.</p>
+    </div>
+    <div class="pillar reveal" style="transition-delay: 0.2s">
+      <div class="pillar-number">03</div>
+      <h3 class="pillar-title">Legado vivo</h3>
+      <p class="pillar-body">Mundo Basket lleva 29 años formando el juego en Chiapas. Esta clínica es una inversión en el futuro del baloncesto chiapaneco. </p>
+    </div>
+  </div>
+</section>
+
+ <!-- ─── ALUMNOS MB ─── -->
+<section class="alumnos" id="alumnos">
+  <div class="alumnos-inner">
+    <div class="alumnos-left reveal">
+      <p class="section-label">Para los alumnos de Mundo Basket</p>
+      <h2 class="alumnos-headline">
+        Tú no eres<br>el público.<br>
+        <span>Eres el equipo.</span>
+      </h2>
+      <p class="alumnos-body">
+        Los alumnos de Mundo Basket son los protagonistas de esta clínica. Serán los jugadores que Iván Déniz dirija, corrija y entrene en cancha frente a los coaches invitados.
+        <br><br>
+        Es <strong>la mejor formación que un jugador joven puede recibir</strong>: ser entrenado, en vivo, por el mejor coach activo de México.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SOLICITUD DE ACCESO ─── -->
+<section class="solicitud" id="solicitud">
+  <div class="solicitud-inner">
+    <div class="solicitud-left reveal">
+      <p class="section-label">Acceso General</p>
+      <h2 class="solicitud-headline">
+        ¿No recibiste invitación<br>pero crees que este<br>espacio es <em>para ti?</em>
+      </h2>
+      <p class="solicitud-body">
+        El cupo es limitado. Cada lugar está pensado para un coach que venga a trabajar, a aprender y a llevar algo concreto de regreso a su equipo. Pedimos que te registres para garantizar que el espacio sea aprovechado al 100%.
+        <br><br>
+        Registra tu lugar. El equipo de Mundo Basket confirmará tu participación.</p>
+    </div>
+
+    <div class="solicitud-right reveal">
+      <form class="solicitud-form" id="solicitud-form" action="https://formspree.io/f/xaqlndwo" method="POST">
+
+        <div class="form-field">
+          <label class="form-label" for="nombre">Nombre completo</label>
+          <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="academia">Academia o club</label>
+          <input class="form-input" type="text" id="academia" name="academia" placeholder="Nombre de tu academia o equipo" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="ciudad">Ciudad</label>
+          <input class="form-input" type="text" id="ciudad" name="ciudad" placeholder="¿De dónde vienes?" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="correo">Correo electrónico</label>
+          <input class="form-input" type="email" id="correo" name="correo" placeholder="Para contactarte" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="motivo">¿Por qué quieres asistir?</label>
+          <textarea class="form-input form-textarea" id="motivo" name="motivo" placeholder="Cuéntanos sobre tu trabajo como coach y por qué este espacio es importante para ti." required></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Solicitar acceso</button>
+        <p class="form-disclaimer">Al enviar tu solicitud aceptas que el equipo de Mundo Basket te contacte por correo para confirmar o declinar tu participación.</p>
+      </form>
+
+      <div class="form-success" id="form-success">
+        Tu solicitud fue enviada. El equipo de Mundo Basket la revisará y te contactará en las próximas 48 horas.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ─── -->
+<section class="cta-section" id="registro">
+  <p class="cta-eyebrow reveal">17, 18 y 19 de Abril · Evento gratuito</p>
+  <h2 class="cta-headline reveal">
+    <span>El mejor</span><br>coach de México.<br>Tu ciudad.
+  </h2>
+  <a href="#alumnos" class="btn-large reveal">No te lo puedes perder</a>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-brand">Mundo <span>Basket</span> · Chiapas</div>
+  <div class="footer-right">29 Aniversario · Clínica Internacional con Coach Iván Déniz</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Formulario de solicitud
+  const form = document.getElementById('solicitud-form');
+  const success = document.getElementById('form-success');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          btn.textContent = 'Error al enviar — intenta de nuevo';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Error al enviar — intenta de nuevo';
+        btn.disabled = false;
+      }
+    });
+  }
+</script>
+</body>
+</html>
