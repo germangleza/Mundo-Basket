@@ -66,6 +66,7 @@
     background: rgba(10,10,10,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: opacity 0.35s ease, transform 0.35s ease;
   }
   .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .nav-logo-icon { width: 42px; height: 42px; }
@@ -783,7 +784,17 @@ window.addEventListener('DOMContentLoaded', function() {
   // ── NAV SCROLL ──
   var nav = document.querySelector('nav');
   window.addEventListener('scroll', function() {
-    if (nav) nav.style.boxShadow = window.scrollY > 60 ? '0 2px 20px rgba(0,0,0,0.5)' : 'none';
+    if (!nav) return;
+    if (window.scrollY > 80) {
+      nav.style.opacity = '0';
+      nav.style.transform = 'translateY(-100%)';
+      nav.style.pointerEvents = 'none';
+    } else {
+      nav.style.opacity = '1';
+      nav.style.transform = 'translateY(0)';
+      nav.style.pointerEvents = '';
+      nav.style.boxShadow = window.scrollY > 60 ? '0 2px 20px rgba(0,0,0,0.5)' : 'none';
+    }
   });
 
   // ── FORM ──
