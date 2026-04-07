@@ -311,7 +311,7 @@
   .contact-icon { width:44px; height:44px; background:rgba(255,94,0,0.12); border:1px solid rgba(255,94,0,0.3); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
   .contact-detail-label { font-size:calc(0.7rem + 2px); font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:4px; }
   .contact-detail-value { font-size:calc(0.95rem + 2px); color:rgba(255,255,255,0.75); line-height:1.5; }
-  .sedes-label { font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin:32px 0 16px; padding-top:28px; border-top:1px solid rgba(255,255,255,0.08); }
+  .sedes-label { font-size:17px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--orange); margin:32px 0 16px; padding-top:28px; border-top:1px solid rgba(255,255,255,0.08); }
   .sedes-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .sede-card { padding:16px; border:1px solid rgba(255,255,255,0.08); border-radius:4px; }
   .sede-ciudad { font-weight:700; color:var(--white); font-size:0.95rem; margin-bottom:4px; }
@@ -648,6 +648,20 @@
   </div>
 </section>
 
+<!-- GALLERY CAROUSEL -->
+<section class="gallery-carousel-section">
+  <div class="gc-header reveal">
+    <div class="section-tag">Galería</div>
+    <h2 class="section-title">Momentos<br>en la <span style="color:var(--orange)">cancha</span></h2>
+  </div>
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carouselTrack"></div>
+    <button class="carousel-btn carousel-prev" id="prevBtn">&#8249;</button>
+    <button class="carousel-btn carousel-next" id="nextBtn">&#8250;</button>
+  </div>
+  <div class="carousel-dots" id="carouselDots"></div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="cta" style="scroll-margin-top:80px;">
   <div class="reveal">
@@ -693,22 +707,22 @@
     </div>
     <div class="sedes-label">También estamos en</div>
     <div class="sedes-grid">
-      <div class="sede-card">
+      <a href="https://wa.me/529616607092" target="_blank" class="sede-card" style="text-decoration:none;display:block;">
         <div class="sede-ciudad">Campanario · Tuxtla Gtz.</div>
-        <div class="sede-tel">(961) 000 0000</div>
-      </div>
-      <div class="sede-card">
+        <div class="sede-tel">(961) 660 7092</div>
+      </a>
+      <a href="https://wa.me/529611357937" target="_blank" class="sede-card" style="text-decoration:none;display:block;">
         <div class="sede-ciudad">Comitán</div>
-        <div class="sede-tel">(963) 000 0000</div>
-      </div>
-      <div class="sede-card">
+        <div class="sede-tel">(961) 135 7937</div>
+      </a>
+      <a href="https://wa.me/529612436456" target="_blank" class="sede-card" style="text-decoration:none;display:block;">
         <div class="sede-ciudad">Chiapa de Corzo</div>
-        <div class="sede-tel">(961) 000 0000</div>
-      </div>
-      <div class="sede-card">
+        <div class="sede-tel">(961) 243 6456</div>
+      </a>
+      <a href="https://wa.me/529611909114" target="_blank" class="sede-card" style="text-decoration:none;display:block;">
         <div class="sede-ciudad">Coita</div>
-        <div class="sede-tel">(961) 000 0000</div>
-      </div>
+        <div class="sede-tel">(961) 190 9114</div>
+      </a>
     </div>
   </div>
   </section>
