@@ -513,11 +513,9 @@
 <!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-bg"></div>
-  <!-- Correct basketball half-court lines -->
+  <canvas id="heroParticles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
 
-  <!-- Floating basketball -->
-
-  <div style="position:relative;z-index:2;width:100%;max-width:900px;margin:0 auto;">
+  <div id="heroContent" style="position:relative;z-index:2;width:100%;max-width:900px;margin:0 auto;">
     <div class="hero-tag">Escuela de Basquetbol desde 1997</div>
     <h1 class="hero-title">
       Club<br>
@@ -533,6 +531,7 @@
     </div>
   </div>
 </section>
+<div id="heroParallaxGhost" style="display:none"></div>
 
 <!-- MARQUEE -->
 <div class="marquee-strip">
@@ -862,6 +861,99 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
+/* ── HERO PARTICLES ── */
+(function(){
+  var canvas = document.getElementById('heroParticles');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var COUNT = 55;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function rand(min, max) { return min + Math.random() * (max - min); }
+
+  function spawn() {
+    return {
+      x:    rand(0, canvas.width),
+      y:    rand(canvas.height * 0.2, canvas.height),
+      r:    rand(1.2, 3.2),
+      vy:   rand(-0.45, -1.1),
+      vx:   rand(-0.2, 0.2),
+      alpha: rand(0.15, 0.55),
+      life:  0,
+      maxLife: rand(120, 260)
+    };
+  }
+
+  for (var i = 0; i < COUNT; i++) {
+    var p = spawn();
+    p.life = rand(0, p.maxLife); // stagger
+    particles.push(p);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.life++;
+      p.x += p.vx;
+      p.y += p.vy;
+
+      var progress = p.life / p.maxLife;
+      // fade in first 20%, fade out last 30%
+      var a = progress < 0.2  ? (progress / 0.2) * p.alpha
+            : progress > 0.7  ? ((1 - progress) / 0.3) * p.alpha
+            : p.alpha;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,94,0,' + a + ')';
+      ctx.fill();
+
+      if (p.life >= p.maxLife) {
+        particles[i] = spawn();
+        particles[i].life = 0;
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── HERO PARALLAX ── */
+(function(){
+  var content = document.getElementById('heroContent');
+  var bg      = document.querySelector('.hero-bg');
+  if (!content) return;
+
+  var ticking = false;
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  function update() {
+    var scrollY = window.scrollY;
+    // Content moves up at 35% of scroll speed (slower than page = parallax feel)
+    content.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
+    content.style.opacity   = Math.max(0, 1 - scrollY / 500);
+    // Background moves at 15% — even slower, creates depth
+    if (bg) bg.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
 </script>
 </body>
 </html>
