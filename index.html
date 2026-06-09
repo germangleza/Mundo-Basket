@@ -274,8 +274,8 @@
   /* ── PROGRAMS ── */
   .programs { background: var(--black); }
   .programs-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; flex-wrap:wrap; gap:24px; }
-  .gender-badges { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
-  .gender-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,94,0,0.12); border:1px solid rgba(255,94,0,0.35); color:var(--orange); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.82rem; letter-spacing:0.18em; text-transform:uppercase; padding:7px 14px; }
+  .gender-badges { display:flex; justify-content:center; gap:16px; margin-bottom:40px; flex-wrap:wrap; }
+  .gender-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,94,0,0.12); border:1px solid rgba(255,94,0,0.35); color:var(--orange); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; letter-spacing:0.2em; text-transform:uppercase; padding:11px 28px; }
   .programs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
   .program-card { background:var(--gray); padding:48px 36px; position:relative; overflow:hidden; transition:all 0.35s; }
   .program-card::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,94,0,0.1) 0%,transparent 60%); opacity:0; transition:opacity 0.35s; }
@@ -509,8 +509,6 @@
     section { padding:72px 24px; }
     .hero { padding:130px 24px 60px; }
     .about,.contact { grid-template-columns:1fr; gap:48px; }
-    .programs-header { flex-direction:column; align-items:flex-start; gap:20px; }
-    .programs-cta-btn { align-self:flex-start; }
     .programs-grid { grid-template-columns:1fr; }
     .why-grid { grid-template-columns:1fr 1fr; }
     .gallery-grid { grid-template-columns:1fr 1fr; }
@@ -525,8 +523,7 @@
     .form-row { grid-template-columns:1fr; }
     .gallery-grid { grid-template-columns:1fr; }
     .gallery-item:first-child { grid-column:span 1; aspect-ratio:4/3; }
-    .gender-badges { gap:8px; }
-    .gender-badge { font-size:0.78rem; padding:6px 12px; }
+    .gender-badge { font-size:0.95rem; padding:9px 20px; }
     .programs-cta-btn { width:100%; justify-content:center; }
   }
 </style>
@@ -623,18 +620,17 @@
     <div>
       <div class="section-tag">Programas de Entrenamiento</div>
       <h2 class="section-title">Entrena con<br><span style="color:var(--orange)">los mejores</span></h2>
-      <div class="gender-badges">
-        <span class="gender-badge">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          Varonil
-        </span>
-        <span class="gender-badge">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          Femenil
-        </span>
-      </div>
     </div>
-    <a href="#cta" class="btn-primary programs-cta-btn">Inscribir a mi hijo</a>
+  </div>
+  <div class="gender-badges reveal">
+    <span class="gender-badge">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Varonil
+    </span>
+    <span class="gender-badge">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Femenil
+    </span>
   </div>
   <div class="programs-grid">
     <div class="program-card reveal">
@@ -652,6 +648,9 @@
       <h3 class="program-title">Categoría Juvenil</h3>
       <div class="program-desc">Preparación competitiva de alto nivel. Para jóvenes que buscan representar al club en torneos estatales y nacionales.</div>
     </div>
+  </div>
+  <div style="text-align:center;margin-top:48px;">
+    <a href="#cta" class="btn-primary programs-cta-btn">Inscribir a mi hijo</a>
   </div>
 </section>
 
