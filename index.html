@@ -446,6 +446,43 @@
     .carousel-slide { flex: 0 0 92%; max-width: 92%; }
   }
 
+  /* ── GLITCH ── */
+  @keyframes glitch-clip-1 {
+    0%   { clip-path: inset(0 0 95% 0); transform: translate(-3px, 0); }
+    20%  { clip-path: inset(30% 0 50% 0); transform: translate(3px, 0); }
+    40%  { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 0); }
+    60%  { clip-path: inset(10% 0 75% 0); transform: translate(2px, 0); }
+    80%  { clip-path: inset(80% 0 5%  0); transform: translate(-3px, 0); }
+    100% { clip-path: inset(0 0 95% 0); transform: translate(0, 0); }
+  }
+  @keyframes glitch-clip-2 {
+    0%   { clip-path: inset(50% 0 30% 0); transform: translate(3px, 0); }
+    25%  { clip-path: inset(15% 0 70% 0); transform: translate(-3px, 0); }
+    50%  { clip-path: inset(75% 0 10% 0); transform: translate(2px, 0); }
+    75%  { clip-path: inset(40% 0 45% 0); transform: translate(-2px, 0); }
+    100% { clip-path: inset(50% 0 30% 0); transform: translate(0, 0); }
+  }
+  .glitch-wrap { position: relative; display: inline-block; }
+  .glitch-wrap::before,
+  .glitch-wrap::after {
+    content: attr(data-text);
+    position: absolute; inset: 0;
+    font-family: inherit; font-weight: inherit; font-style: inherit;
+    font-size: inherit; line-height: inherit; text-transform: inherit;
+    color: inherit; -webkit-text-stroke: inherit;
+    pointer-events: none; opacity: 0;
+  }
+  .glitch-wrap::before { color: #ff0040; }
+  .glitch-wrap::after  { color: #00eaff; }
+  .glitch-wrap.glitching::before {
+    opacity: 1;
+    animation: glitch-clip-1 0.08s steps(1) 6;
+  }
+  .glitch-wrap.glitching::after {
+    opacity: 1;
+    animation: glitch-clip-2 0.08s steps(1) 6;
+  }
+
   .free-trial-badge {
     display: inline-block;
     background: rgba(255,255,255,0.12);
@@ -646,8 +683,18 @@
 <section class="cta-section" id="cta" style="scroll-margin-top:80px;">
   <div class="reveal">
     <div class="section-tag">¡Únete al equipo!</div>
-    <h2 class="section-title">¿Listo para<br><span class="outline">jugar?</span></h2>
-    <div class="free-trial-badge" style="margin-top:32px;">🎉 ¡Primera clase de muestra GRATIS!</div>
+    <h2 class="section-title" id="ctaGlitchTitle">¿Listo para<br><span class="outline">jugar?</span></h2>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap;">
+      <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,94,0,0.12);border:1px solid rgba(255,94,0,0.35);color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.18em;text-transform:uppercase;padding:7px 14px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Varonil
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,94,0,0.12);border:1px solid rgba(255,94,0,0.35);color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.18em;text-transform:uppercase;padding:7px 14px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Femenil
+      </span>
+    </div>
+    <div class="free-trial-badge" style="margin-top:24px;">🎉 ¡Primera clase de muestra GRATIS!</div>
     <p class="cta-sub">Inscripciones abiertas para niños y jóvenes de 5 a 18 años. Ven a conocernos sin compromiso — la primera clase es completamente gratis.</p>
     <div class="cta-actions">
       <a href="tel:9615793605" class="btn-primary">📱 Llamar Ahora</a>
@@ -861,6 +908,53 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
+/* ── CTA GLITCH ── */
+(function(){
+  var title = document.getElementById('ctaGlitchTitle');
+  if (!title) return;
+
+  // Wrap plain text nodes in glitch spans
+  title.querySelectorAll('span').forEach(function(span) {
+    var w = document.createElement('span');
+    w.className = 'glitch-wrap';
+    w.setAttribute('data-text', span.textContent);
+    span.parentNode.insertBefore(w, span);
+    w.appendChild(span);
+  });
+
+  // Also wrap the first text node "¿Listo para"
+  var firstNode = title.childNodes[0];
+  if (firstNode && firstNode.nodeType === 3) {
+    var w = document.createElement('span');
+    w.className = 'glitch-wrap';
+    w.setAttribute('data-text', firstNode.textContent);
+    title.insertBefore(w, firstNode);
+    w.appendChild(firstNode);
+  }
+
+  function fireGlitch() {
+    title.querySelectorAll('.glitch-wrap').forEach(function(el, i) {
+      setTimeout(function() {
+        el.classList.add('glitching');
+        setTimeout(function() { el.classList.remove('glitching'); }, 550);
+      }, i * 60);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          fireGlitch();
+          // Re-fire once more after a short delay for impact
+          setTimeout(fireGlitch, 700);
+        }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(title);
+  }
+})();
 
 /* ── HERO PARTICLES ── */
 (function(){
